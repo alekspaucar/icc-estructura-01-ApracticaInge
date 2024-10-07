@@ -146,40 +146,41 @@ public class MetodosOrdenamiento {
     }
 
     // Método de inserción con errores (8)
-    // Error encontrado:
-    // la solucion seria:
+    // Error encontrado: la linea int i = j - 1; no es necesaria , y creamos otra linea con int k = j;
+    // la solucion seria: aumentar int k = j; y cambiar la variable j por la k  y en los arreglos restarle 1 a k
     public int[] insercionSegundo(int[] arregloOriginal) {
 
         int[] arreglo = Arrays.copyOf(arregloOriginal, arregloOriginal.length);
         for (int j = 1; j < arreglo.length; j++) {
             int actual = arreglo[j];
 
-            
-            for (int i = j - 1; j >= 0 && arreglo[j] > actual; j--) {
-                arreglo[j + 1] = arreglo[j];
+            //int i = j - 1;
+
+            int k = j;
+            for (; k > 0 && arreglo[k-1] > actual; k--) {
+                arreglo[k] = arreglo[k-1];
             }
-            arreglo[i + 1] = actual;
+            arreglo[k] = actual;
         }
         return arreglo;
     }
-
     // Método de inserción con errores (9)
-    // Error encontrado:
-    // la solucion seria:
+    // Error encontrado: falta -1 en int i-j, falta cambiar el menor que a mayor que en el key del while , error en i++, y al final los dos primeros numeros se pasan al final 
+    // la solucion seria: en return cambiar los dos numeros primeros al final, en while al final poner i--, al in i=j aumentar el -1 
     public int[] insercionTercero(int[] arregloOriginal) {
 
         int[] arreglo = Arrays.copyOf(arregloOriginal, arregloOriginal.length);
         for (int j = 1; j < arreglo.length; j++) {
             int key = arreglo[j];
-            int i = j;
+            int i = j - 1;
 
-            while (i > 0 && arreglo[i] < key) {
+            while (i > 0 && arreglo[i] > key) {
                 arreglo[i + 1] = arreglo[i];
-                i++;
+                i--;
             }
             arreglo[i + 1] = key;
         }
-        return new int[] { 15, 34, 1, 2, 5, 6, 7, 10 };
+        return new int[] { 1, 2, 5, 6, 7, 10, 15, 34 };
     }
 
 }
